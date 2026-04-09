@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Muhammad Faraz — Flutter Developer & UI/UX Designer</title>
+  <style>
+    .ico { display:inline-block; vertical-align:middle; flex-shrink:0; fill:none; stroke:currentColor; stroke-linecap:round; stroke-linejoin:round; }
+
+    :root {
+      --navy:       #0d1b2a;
+      --navy-card:  #112233;
+      --navy-light: #1a2e45;
+      --teal:       #2dd4bf;
+      --teal-dim:   #1a8a7a;
+      --teal-glow:  rgba(45,212,191,0.12);
+      --text:       #e2e8f0;
+      --text-muted: #94a3b8;
+      --border:     rgba(45,212,191,0.18);
+      --shadow:     0 4px 32px rgba(0,0,0,0.45);
+      --radius:     14px;
+      --trans:      0.3s ease;
+    }
+    [data-theme="light"] {
+      --navy:       #f0f4f8;
+      --navy-card:  #ffffff;
+      --navy-light: #dde8f5;
+      --teal:       #0d9488;
+      --teal-dim:   #0f766e;
+      --teal-glow:  rgba(13,148,136,0.1);
+      --text:       #1e293b;
+      --text-muted: #475569;
+      --border:     rgba(13,148,136,0.2);
+      --shadow:     0 4px 24px rgba(0,0,0,0.12);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Segoe UI', system-ui, sans-serif; background: var(--navy); color: var(--text); line-height: 1.7; transition: background var(--trans), color var(--trans); }
+    a { color: var(--teal); text-decoration: none; transition: opacity var(--trans); }
+    a:hover { opacity: 0.8; }
+
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--navy); }
+    ::-webkit-scrollbar-thumb { background: var(--teal-dim); border-radius: 3px; }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 6vw; height: 64px;
+      background: rgba(13,27,42,0.88); backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border); transition: background var(--trans);
+    }
+    /* LOGO STYLES - Add this to your existing CSS */
+    /* .nav-logo {
+      display: flex;
+      align-items: center;
+      height: 100%;
+    }
+
+    .nav-logo-img {
+      height: 50px;
+      width: auto;
+      max-height: 70%;
+      object-fit: contain;
+      transition: height var(--trans);
+    }
+
+    /* Responsive logo sizes */
+    /*@media (max-width: 768px) {
+      .nav-logo-img {
+        height: 32px;
+      }
+    } */
+
+    /* LOGO SVG STYLES */
+/* LOGO SVG STYLES - Updated for larger logo */
+/* LOGO SVG STYLES */
+.nav-logo {
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+.nav-logo-svg {
+  height: 48px;  /* Perfect size for navbar */
+  width: auto;
+  object-fit: contain;
+  transition: all var(--trans);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .nav-logo-svg {
+    height: 42px;
+  }
+}
+
+@media (max-width: 600px) {
+  .nav-logo-svg {
+    height: 38px;
+  }
+}
+
+/* Optional: On very small screens, hide the divider line and text to save space */
+@media (max-width: 550px) {
+  .nav-logo-svg line,
+  .nav-logo-svg text:not(:first-of-type) {
+    display: none;
+  }
+}
+
+    [data-theme="light"] nav { background: rgba(240,244,248,0.88); }
+    /* .nav-logo { font-size: 1.15rem; font-weight: 700; color: var(--teal); letter-spacing: 0.03em; } */
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a { color: var(--text-muted); font-size: 0.92rem; font-weight: 500; transition: color var(--trans); }
+    .nav-links a:hover { color: var(--teal); opacity: 1; }
+    .nav-right { display: flex; align-items: center; gap: 1rem; }
+    .theme-btn {
+      background: none; border: 1px solid var(--border); color: var(--teal);
+      width: 36px; height: 36px; border-radius: 50%; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: background var(--trans);
+    }
+    .theme-btn:hover { background: var(--teal-glow); }
+    .hamburger { display: none; background: none; border: none; color: var(--text); cursor: pointer; padding: 4px; }
+
+    @media (max-width: 768px) {
+      .nav-links { display: none; position: fixed; top: 64px; left: 0; right: 0; background: var(--navy-card); flex-direction: column; align-items: center; gap: 0; padding: 1rem 0; border-bottom: 1px solid var(--border); z-index: 99; }
+      .nav-links.open { display: flex; }
+      .nav-links a { padding: 0.75rem 0; font-size: 1rem; }
+      .hamburger { display: block; }
+    }
+
+    /* HERO */
+    #hero { min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 100px 6vw 60px; position: relative; overflow: hidden; }
+    .hero-bg { position: absolute; inset: 0; z-index: 0; background: radial-gradient(ellipse 70% 60% at 60% 40%, rgba(45,212,191,0.08) 0%, transparent 70%); pointer-events: none; }
+    .hero-inner { position: relative; z-index: 1; display: flex; align-items: center; gap: 4rem; max-width: 1100px; width: 100%; }
+    .hero-text { flex: 1; }
+    .hero-tag { display: inline-flex; align-items: center; gap: 7px; background: var(--teal-glow); border: 1px solid var(--border); color: var(--teal); font-size: 0.8rem; font-weight: 600; padding: 5px 14px; border-radius: 50px; margin-bottom: 1.2rem; letter-spacing: 0.06em; text-transform: uppercase; }
+    .hero-text h1 { font-size: clamp(2.2rem, 5vw, 3.8rem); font-weight: 800; line-height: 1.15; margin-bottom: 0.5rem; }
+    .hero-text h1 span { color: var(--teal); }
+    .hero-subtitle { font-size: clamp(1rem, 2vw, 1.25rem); color: var(--text-muted); margin-bottom: 1.5rem; }
+    .hero-bio { font-size: 1rem; color: var(--text-muted); max-width: 520px; margin-bottom: 2rem; line-height: 1.8; }
+    .hero-cta { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .btn { padding: 0.7rem 1.6rem; border-radius: 8px; font-weight: 600; font-size: 0.92rem; cursor: pointer; transition: all var(--trans); display: inline-flex; align-items: center; gap: 8px; }
+    .btn-primary { background: var(--teal); color: #0d1b2a; border: none; }
+    .btn-primary:hover { background: #5eead4; opacity: 1; color: #0d1b2a; }
+    .btn-outline { background: transparent; color: var(--teal); border: 1.5px solid var(--teal); }
+    .btn-outline:hover { background: var(--teal-glow); opacity: 1; }
+    .hero-avatar { width: 240px; height: 240px; flex-shrink: 0; border-radius: 50%; border: 3px solid var(--teal); background: var(--navy-light); display: flex; align-items: center; justify-content: center; font-size: 5rem; color: var(--teal); font-weight: 700; box-shadow: 0 0 0 8px var(--teal-glow); user-select: none; }
+    @media (max-width: 768px) {
+      .hero-inner { flex-direction: column-reverse; gap: 2rem; text-align: center; }
+      .hero-cta { justify-content: center; }
+      .hero-bio { margin: 0 auto 2rem; }
+      .hero-avatar { width: 160px; height: 160px; font-size: 3.5rem; }
+    }
+
+    /* SECTIONS */
+    section { padding: 90px 6vw; }
+    .section-label { font-size: 0.75rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--teal); margin-bottom: 0.4rem; }
+    .section-title { font-size: clamp(1.7rem, 3vw, 2.4rem); font-weight: 800; margin-bottom: 3rem; position: relative; display: inline-block; }
+    .section-title::after { content: ''; position: absolute; bottom: -8px; left: 0; width: 48px; height: 3px; background: var(--teal); border-radius: 2px; }
+    .max-w { max-width: 1100px; margin: 0 auto; }
+
+    /* ABOUT */
+    #about { background: var(--navy-card); }
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start; }
+    .about-text p { color: var(--text-muted); margin-bottom: 1rem; line-height: 1.85; }
+    .skills-group { margin-bottom: 1.8rem; }
+    .skills-group h4 { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--teal); margin-bottom: 0.75rem; }
+    .skill-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+    .skill-tag { background: var(--teal-glow); border: 1px solid var(--border); color: var(--text); font-size: 0.82rem; padding: 4px 12px; border-radius: 6px; font-weight: 500; }
+    @media (max-width: 768px) { .about-grid { grid-template-columns: 1fr; } }
+
+    /* EXPERIENCE */
+    #experience { background: var(--navy); }
+    .timeline { position: relative; padding-left: 2rem; }
+    .timeline::before { content: ''; position: absolute; left: 8px; top: 4px; bottom: 0; width: 2px; background: var(--border); }
+    .tl-item { position: relative; margin-bottom: 2.5rem; }
+    .tl-dot { position: absolute; left: -1.85rem; top: 5px; width: 14px; height: 14px; border-radius: 50%; background: var(--teal); border: 3px solid var(--navy); box-shadow: 0 0 0 3px var(--teal-glow); }
+    .tl-item h3 { font-size: 1.05rem; font-weight: 700; color: var(--text); }
+    .tl-meta { font-size: 0.83rem; color: var(--teal); margin-bottom: 0.7rem; font-weight: 600; display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+    .tl-item ul { padding-left: 1.2rem; color: var(--text-muted); font-size: 0.93rem; }
+    .tl-item ul li { margin-bottom: 0.35rem; }
+
+    /* PROJECTS */
+    #projects { background: var(--navy-card); }
+    .projects-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.5rem; }
+    .project-card { background: var(--navy-light); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; transition: transform var(--trans), box-shadow var(--trans), border-color var(--trans); cursor: pointer; display: flex; flex-direction: column; }
+    .project-card:hover { transform: translateY(-5px); box-shadow: var(--shadow); border-color: var(--teal); }
+    .proj-img { height: 160px; background: var(--navy); display: flex; align-items: center; justify-content: center; color: var(--teal); border-bottom: 1px solid var(--border); }
+    .proj-body { padding: 1.25rem; flex: 1; display: flex; flex-direction: column; }
+    .proj-body h3 { font-size: 1rem; font-weight: 700; margin-bottom: 0.5rem; }
+    .proj-body p { font-size: 0.88rem; color: var(--text-muted); flex: 1; margin-bottom: 1rem; line-height: 1.65; }
+    .tech-pills { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 1rem; }
+    .tech-pill { font-size: 0.72rem; padding: 3px 9px; border-radius: 4px; background: var(--teal-glow); border: 1px solid var(--border); color: var(--teal); font-weight: 600; }
+    .proj-footer { display: flex; justify-content: flex-end; }
+    .view-btn { font-size: 0.82rem; color: var(--teal); font-weight: 600; background: none; border: none; cursor: pointer; display: flex; align-items: center; gap: 6px; transition: gap var(--trans); }
+    .view-btn:hover { gap: 10px; }
+
+    /* MODAL */
+    .modal-overlay { display: none; position: fixed; inset: 0; z-index: 200; background: rgba(0,0,0,0.75); backdrop-filter: blur(4px); align-items: center; justify-content: center; padding: 2rem; }
+    .modal-overlay.open { display: flex; }
+    .modal { background: var(--navy-card); border: 1px solid var(--border); border-radius: var(--radius); max-width: 640px; width: 100%; box-shadow: var(--shadow); animation: fadeUp 0.25s ease; max-height: 90vh; overflow-y: auto; }
+    @keyframes fadeUp { from { opacity:0; transform: translateY(20px); } to { opacity:1; transform: none; } }
+    .modal-header { display: flex; align-items: center; justify-content: space-between; padding: 1.4rem 1.6rem; border-bottom: 1px solid var(--border); }
+    .modal-header h2 { font-size: 1.2rem; font-weight: 700; }
+    .modal-close { background: none; border: 1px solid var(--border); color: var(--text-muted); width: 32px; height: 32px; border-radius: 8px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: color var(--trans), border-color var(--trans), background var(--trans); }
+    .modal-close:hover { color: var(--teal); border-color: var(--teal); background: var(--teal-glow); }
+    .modal-body { padding: 1.6rem; }
+    .modal-body p { color: var(--text-muted); margin-bottom: 1.2rem; line-height: 1.8; font-size: 0.95rem; }
+    .modal-tech { margin-bottom: 1.4rem; }
+    .modal-tech h4 { font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--teal); margin-bottom: 0.6rem; }
+    .modal-links { display: flex; gap: 0.8rem; flex-wrap: wrap; }
+
+    /* CONTACT */
+    #contact { background: var(--navy); }
+    .contact-inner { max-width: 640px; margin: 0 auto; text-align: center; }
+    .contact-inner p { color: var(--text-muted); margin-bottom: 2.5rem; font-size: 1rem; line-height: 1.8; }
+    .contact-links { display: flex; justify-content: center; gap: 1.2rem; flex-wrap: wrap; }
+    .contact-link { display: flex; align-items: center; gap: 0.6rem; padding: 0.75rem 1.4rem; border-radius: 10px; border: 1.5px solid var(--border); background: var(--navy-card); color: var(--text); font-size: 0.92rem; font-weight: 600; transition: all var(--trans); }
+    .contact-link .ico { color: var(--teal); }
+    .contact-link:hover { border-color: var(--teal); background: var(--teal-glow); opacity: 1; }
+
+    /* FOOTER */
+    footer { background: var(--navy-card); border-top: 1px solid var(--border); text-align: center; padding: 1.8rem 6vw; color: var(--text-muted); font-size: 0.82rem; display: flex; align-items: center; justify-content: center; gap: 6px; }
+    footer span { color: var(--teal); }
+  </style>
+</head>
+<body>
+
+<!-- ICON SPRITE — all SVG icons defined once, used everywhere via <use> -->
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none">
+  <symbol id="ico-code"       viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></symbol>
+  <symbol id="ico-send"       viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></symbol>
+  <symbol id="ico-sun"        viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></symbol>
+  <symbol id="ico-moon"       viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></symbol>
+  <symbol id="ico-menu"       viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></symbol>
+  <symbol id="ico-arrow-right"viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></symbol>
+  <symbol id="ico-external"   viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></symbol>
+  <symbol id="ico-github"     viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></symbol>
+  <symbol id="ico-linkedin"   viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></symbol>
+  <symbol id="ico-mail"       viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></symbol>
+  <symbol id="ico-briefcase"  viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></symbol>
+  <symbol id="ico-cal"        viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></symbol>
+  <symbol id="ico-brain"      viewBox="0 0 24 24"><path d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96-.46 2.5 2.5 0 0 1-2.96-3.08 3 3 0 0 1-.34-5.58 2.5 2.5 0 0 1 1.32-4.24 2.5 2.5 0 0 1 4.44-1.24"/><path d="M14.5 2A2.5 2.5 0 0 0 12 4.5v15a2.5 2.5 0 0 0 4.96-.46 2.5 2.5 0 0 0 2.96-3.08 3 3 0 0 0 .34-5.58 2.5 2.5 0 0 0-1.32-4.24 2.5 2.5 0 0 0-4.44-1.24"/></symbol>
+  <symbol id="ico-phone"      viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18" stroke-width="3"/></symbol>
+  <symbol id="ico-palette"    viewBox="0 0 24 24"><circle cx="13.5" cy="6.5" r=".5" fill="currentColor"/><circle cx="17.5" cy="10.5" r=".5" fill="currentColor"/><circle cx="8.5" cy="7.5" r=".5" fill="currentColor"/><circle cx="6.5" cy="12.5" r=".5" fill="currentColor"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"/></symbol>
+  <symbol id="ico-heart"      viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></symbol>
+  <symbol id="ico-x"          viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></symbol>
+  <symbol id="ico-star"       viewBox="0 0 24 24" fill="currentColor" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></symbol>
+</svg>
+
+<!-- NAV -->
+<nav>
+  <!-- <div class="nav-logo">
+  <img src="logo.png" alt="Muhammad Faraz" class="nav-logo-img">
+</div> -->
+
+  <div class="nav-logo">
+  <svg viewBox="0 0 420 80" xmlns="http://www.w3.org/2000/svg" class="nav-logo-svg">
+    <defs>
+      <linearGradient id="tealGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+        <stop offset="0%" style="stop-color:#2dd4bf;stop-opacity:1" />
+        <stop offset="100%" style="stop-color:#0d9488;stop-opacity:1" />
+      </linearGradient>
+    </defs>
+    
+    <g transform="translate(10, 8)">
+      <path d="M30,15 L15,35 L30,55" stroke="url(#tealGrad)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      <path d="M65,15 L85,35 L65,55 L45,35 Z" stroke="url(#tealGrad)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      <circle cx="50" cy="35" r="4" fill="#2dd4bf"/>
+    </g>
+
+    <text x="110" y="58" font-family="'Inter', 'Segoe UI', sans-serif" font-size="44" font-weight="700">
+      <tspan fill="#2dd4bf">M</tspan>
+      <tspan fill="var(--text)">F</tspan>
+    </text>
+
+    <line x1="200" y1="22" x2="188" y2="62" stroke="var(--text-muted)" stroke-width="1.5" opacity="0.4" />
+    
+    <text x="202" y="39" font-family="'Inter', 'Segoe UI', sans-serif" font-size="13" font-weight="600" fill="var(--text-muted)" letter-spacing="2.5">
+      DEVELOPER
+    </text>
+    <text x="202" y="56" font-family="'Inter', 'Segoe UI', sans-serif" font-size="13" font-weight="600" fill="var(--text-muted)" letter-spacing="2.5">
+      DESIGNER
+    </text>
+  </svg>
+</div>
+
+
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#about">About</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <div class="nav-right">
+    <button class="theme-btn" id="themeBtn" aria-label="Toggle theme">
+      <svg class="ico" id="themeIcon" width="17" height="17" stroke-width="2"><use href="#ico-sun"/></svg>
+    </button>
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <svg class="ico" width="22" height="22" stroke-width="2"><use href="#ico-menu"/></svg>
+    </button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-inner">
+    <div class="hero-text">
+      <div class="hero-tag">
+        <svg class="ico" width="11" height="11" style="fill:currentColor;stroke:none"><use href="#ico-star"/></svg>
+        Available for hire
+      </div>
+      <h1>Hi, I'm <span>Muhammad<br>Faraz</span></h1>
+      <p class="hero-subtitle">Flutter Developer &amp; UI/UX Designer</p>
+      <p class="hero-bio">2+ years building responsive, user-friendly mobile and web applications. Passionate about clean code, beautiful interfaces, and seamless user experiences.</p>
+      <div class="hero-cta">
+        <a href="#projects" class="btn btn-primary">
+          <svg class="ico" width="16" height="16" stroke-width="2"><use href="#ico-code"/></svg>
+          View Projects
+        </a>
+        <a href="#contact" class="btn btn-outline">
+          <svg class="ico" width="16" height="16" stroke-width="2"><use href="#ico-send"/></svg>
+          Get in Touch
+        </a>
+      </div>
+    </div>
+    <div class="hero-avatar">MF</div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="max-w">
+    <div class="section-label">Who I am</div>
+    <h2 class="section-title">About Me</h2>
+    <div class="about-grid">
+      <div class="about-text">
+        <p>I'm a Flutter Developer and UI/UX Designer based in Karachi, Pakistan, with 2+ years of hands-on experience crafting responsive mobile and web applications that people love to use.</p>
+        <p>My work lives at the intersection of code and design. I'm fluent in Dart and Flutter, comfortable integrating Firebase and RESTful APIs, and equally at home in Figma prototyping user flows with careful attention to accessibility and usability.</p>
+        <p>I hold a BS in Software Engineering from Iqra University (2020–2025) and continuously invest in learning new tools and best practices in modern mobile development.</p>
+      </div>
+      <div class="about-skills">
+        <div class="skills-group">
+          <h4>Development</h4>
+          <div class="skill-tags">
+            <span class="skill-tag">Flutter</span><span class="skill-tag">Dart</span><span class="skill-tag">Firebase</span><span class="skill-tag">RESTful APIs</span><span class="skill-tag">Git</span><span class="skill-tag">Mobile Dev</span><span class="skill-tag">Web Dev</span>
+          </div>
+        </div>
+        <div class="skills-group">
+          <h4>Design</h4>
+          <div class="skill-tags">
+            <span class="skill-tag">UI/UX Design</span><span class="skill-tag">Figma</span><span class="skill-tag">Responsive Design</span><span class="skill-tag">Accessibility</span><span class="skill-tag">Prototyping</span>
+          </div>
+        </div>
+        <div class="skills-group">
+          <h4>Core Competencies</h4>
+          <div class="skill-tags">
+            <span class="skill-tag">Cross-functional Collaboration</span><span class="skill-tag">Performance Optimization</span><span class="skill-tag">Clean Code</span><span class="skill-tag">Problem Solving</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="max-w">
+    <div class="section-label">Where I've worked</div>
+    <h2 class="section-title">Experience</h2>
+    <div class="timeline">
+
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <h3>UI/UX Designer</h3>
+        <div class="tl-meta">
+          <svg class="ico" width="14" height="14" stroke-width="2"><use href="#ico-briefcase"/></svg> Zelle Solutions, Karachi &nbsp;·&nbsp;
+          <svg class="ico" width="14" height="14" stroke-width="2"><use href="#ico-cal"/></svg> Sep 2024 – Sep 2025
+        </div>
+        <ul>
+          <li>Designed intuitive, visually engaging interfaces for mobile and web platforms.</li>
+          <li>Created user-centered layouts and interactive prototypes using Figma.</li>
+          <li>Collaborated with developers and stakeholders to convert concepts into functional designs.</li>
+          <li>Ensured responsiveness, accessibility, and usability across multiple devices.</li>
+          <li>Applied usability principles and iterative feedback to deliver polished UX.</li>
+        </ul>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <h3>Junior Flutter Developer</h3>
+        <div class="tl-meta">
+          <svg class="ico" width="14" height="14" stroke-width="2"><use href="#ico-briefcase"/></svg> Zelle Solutions, Karachi &nbsp;·&nbsp;
+          <svg class="ico" width="14" height="14" stroke-width="2"><use href="#ico-cal"/></svg> Aug 2023 – Sep 2025
+        </div>
+        <ul>
+          <li>Developed responsive mobile and web interfaces using Flutter and Dart.</li>
+          <li>Integrated Firebase services and implemented Git-based version control workflows.</li>
+          <li>Worked with designers and backend teams to ship smooth, user-friendly features.</li>
+          <li>Improved UI consistency, application performance, and code maintainability.</li>
+          <li>Gained full-cycle experience from requirements to production deployment.</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="max-w">
+    <div class="section-label">What I've built</div>
+    <h2 class="section-title">Projects</h2>
+
+    <div class="projects-grid">
+
+      <!--
+      ╔══════════════════════════════════════════════════════════╗
+      ║                 HOW TO ADD A NEW PROJECT                 ║
+      ╠══════════════════════════════════════════════════════════╣
+      ║  1. Copy any <div class="project-card"> block below      ║
+      ║     and paste it inside .projects-grid                   ║
+      ║                                                          ║
+      ║  2. Fill in the data-* attributes:                       ║
+      ║     data-title   → full project name (shown in modal)    ║
+      ║     data-desc    → full description (shown in modal)     ║
+      ║     data-tech    → comma-separated stack                  ║
+      ║     data-live    → live URL (leave "" to hide button)    ║
+      ║     data-github  → GitHub URL (leave "" to hide button)  ║
+      ║                                                          ║
+      ║  3. Swap the icon: change ico-brain / ico-phone /        ║
+      ║     ico-palette to any icon id in the SVG sprite above,  ║
+      ║     or replace the <svg> with a real <img> screenshot.   ║
+      ║                                                          ║
+      ║  4. Update the card text: <h3>, <p>, .tech-pill spans    ║
+      ╚══════════════════════════════════════════════════════════╝
+      -->
+
+      <!-- PROJECT 1 — Lumora -->
+      <div class="project-card"
+        data-title="Lumora — Intelligent Mental Health Support App"
+        data-desc="Lumora is a final-year project focused on making mental health support accessible and comfortable. The app features mood tracking, AI-powered chatbot conversations, and structured therapy modules. Designed with deep attention to accessibility, emotional comfort, and intuitive navigation — applying usability heuristics and consistent design systems to reduce cognitive load. The front-end integrates RESTful APIs backed by cloud services for scalable performance."
+        data-tech="Flutter, Dart, RESTful APIs, Firebase, Figma, UI/UX Design"
+        data-live=""
+        data-github="">
+        <div class="proj-img">
+          <svg width="64" height="64" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><use href="#ico-brain"/></svg>
+        </div>
+        <div class="proj-body">
+          <h3>Lumora</h3>
+          <p>An intelligent mental health support app with mood tracking, chatbot therapy, and accessible, calming UI.</p>
+          <div class="tech-pills">
+            <span class="tech-pill">Flutter</span><span class="tech-pill">Firebase</span><span class="tech-pill">REST API</span><span class="tech-pill">Figma</span>
+          </div>
+          <div class="proj-footer">
+            <button class="view-btn">View Details <svg class="ico" width="14" height="14" stroke-width="2.5"><use href="#ico-arrow-right"/></svg></button>
+          </div>
+        </div>
+      </div>
+
+      <!-- PROJECT 2 — uncomment and fill in when ready
+      <div class="project-card"
+        data-title="Your Second Project Title"
+        data-desc="Replace this with a full description of your project. What problem does it solve? What were the key challenges? What are you most proud of? This text appears in the modal when a visitor clicks View Details."
+        data-tech="Flutter, Dart, Firebase"
+        data-live="https://your-live-link.com"
+        data-github="https://github.com/yourusername/repo">
+        <div class="proj-img">
+          <svg width="64" height="64" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><use href="#ico-phone"/></svg>
+        </div>
+        <div class="proj-body">
+          <h3>Your Project Title</h3>
+          <p>Short teaser sentence shown on the card. Keep it to 1–2 lines describing what the project does.</p>
+          <div class="tech-pills">
+            <span class="tech-pill">Flutter</span><span class="tech-pill">Dart</span><span class="tech-pill">Firebase</span>
+          </div>
+          <div class="proj-footer">
+            <button class="view-btn">View Details <svg class="ico" width="14" height="14" stroke-width="2.5"><use href="#ico-arrow-right"/></svg></button>
+          </div>
+        </div>
+      </div>
+      -->
+
+      <!-- PROJECT 3 — uncomment and fill in when ready
+      <div class="project-card"
+        data-title="Your Third Project Title"
+        data-desc="Replace this with a full description of your third project. Describe the features, your role, the tech stack, and any results or outcomes. This appears in the lightbox modal."
+        data-tech="Figma, UI/UX Design, Prototyping"
+        data-live=""
+        data-github="">
+        <div class="proj-img">
+          <svg width="64" height="64" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><use href="#ico-palette"/></svg>
+        </div>
+        <div class="proj-body">
+          <h3>Your Project Title</h3>
+          <p>Short teaser for your third project. Replace with a real description once you add your project details.</p>
+          <div class="tech-pills">
+            <span class="tech-pill">Figma</span><span class="tech-pill">UI/UX</span><span class="tech-pill">Prototyping</span>
+          </div>
+          <div class="proj-footer">
+            <button class="view-btn">View Details <svg class="ico" width="14" height="14" stroke-width="2.5"><use href="#ico-arrow-right"/></svg></button>
+          </div>
+        </div>
+      </div>
+      -->
+
+    </div><!-- end .projects-grid -->
+  </div>
+</section>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modalOverlay" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+  <div class="modal">
+    <div class="modal-header">
+      <h2 id="modalTitle"></h2>
+      <button class="modal-close" id="modalClose" aria-label="Close">
+        <svg class="ico" width="16" height="16" stroke-width="2.5"><use href="#ico-x"/></svg>
+      </button>
+    </div>
+    <div class="modal-body">
+      <p id="modalDesc"></p>
+      <div class="modal-tech">
+        <h4>Tech Stack</h4>
+        <div class="skill-tags" id="modalTech"></div>
+      </div>
+      <div class="modal-links" id="modalLinks"></div>
+    </div>
+  </div>
+</div>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="max-w">
+    <div class="contact-inner">
+      <div class="section-label" style="text-align:center">Say hello</div>
+      <h2 class="section-title" style="display:block;text-align:center">Get In Touch</h2>
+      <p>Whether you have a project in mind, want to collaborate, or just want to say hi — my inbox is always open. I'll get back to you as soon as I can!</p>
+      <div class="contact-links">
+        <a class="contact-link" href="mailto:faraznawaz598@gmail.com">
+          <svg class="ico" width="18" height="18" stroke-width="2"><use href="#ico-mail"/></svg>
+          faraznawaz598@gmail.com
+        </a>
+        <a class="contact-link" href="https://www.linkedin.com/in/muhammad-faraz-b619002b2" target="_blank" rel="noopener">
+          <svg class="ico" width="18" height="18" stroke-width="2"><use href="#ico-linkedin"/></svg>
+          LinkedIn
+        </a>
+        <!-- Replace # below with https://github.com/yourusername once you have a GitHub profile -->
+        <a class="contact-link" href="#" target="_blank" rel="noopener">
+          <svg class="ico" width="18" height="18" stroke-width="2"><use href="#ico-github"/></svg>
+          GitHub
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <svg class="ico" width="14" height="14" stroke-width="2" style="color:var(--teal)"><use href="#ico-heart"/></svg>
+  Designed &amp; built by <span>Muhammad Faraz</span> &nbsp;·&nbsp; Flutter Developer &amp; UI/UX Designer, Karachi
+</footer>
+
+<script>
+  /* THEME */
+  const root = document.documentElement;
+  const themeBtn  = document.getElementById('themeBtn');
+  const themeIcon = document.getElementById('themeIcon');
+
+  function applyTheme(t) {
+    root.setAttribute('data-theme', t);
+    themeIcon.querySelector('use').setAttribute('href', t === 'dark' ? '#ico-sun' : '#ico-moon');
+    localStorage.setItem('theme', t);
+  }
+  applyTheme(localStorage.getItem('theme') || 'dark');
+  themeBtn.addEventListener('click', () => applyTheme(root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark'));
+
+  /* MOBILE NAV */
+  const hamburger = document.getElementById('hamburger');
+  const navLinks  = document.getElementById('navLinks');
+  hamburger.addEventListener('click', () => navLinks.classList.toggle('open'));
+  navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
+
+  /* MODAL */
+  const overlay    = document.getElementById('modalOverlay');
+  const modalTitle = document.getElementById('modalTitle');
+  const modalDesc  = document.getElementById('modalDesc');
+  const modalTech  = document.getElementById('modalTech');
+  const modalLinks = document.getElementById('modalLinks');
+  const modalClose = document.getElementById('modalClose');
+
+  function openModal(card) {
+    modalTitle.textContent = card.dataset.title;
+    modalDesc.textContent  = card.dataset.desc;
+    modalTech.innerHTML = '';
+    card.dataset.tech.split(',').forEach(t => {
+      const s = document.createElement('span'); s.className = 'skill-tag'; s.textContent = t.trim(); modalTech.appendChild(s);
+    });
+    modalLinks.innerHTML = '';
+    const live = card.dataset.live, gh = card.dataset.github;
+    if (live && !live.includes('your-live'))
+      modalLinks.innerHTML += `<a href="${live}" target="_blank" rel="noopener" class="btn btn-primary"><svg class="ico" width="15" height="15" stroke-width="2"><use href="#ico-external"/></svg> Live Demo</a>`;
+    if (gh && !gh.includes('yourusername'))
+      modalLinks.innerHTML += `<a href="${gh}" target="_blank" rel="noopener" class="btn btn-outline"><svg class="ico" width="15" height="15" stroke-width="2"><use href="#ico-github"/></svg> View on GitHub</a>`;
+    overlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeModal() { overlay.classList.remove('open'); document.body.style.overflow = ''; }
+
+  document.querySelectorAll('.project-card').forEach(c => c.addEventListener('click', () => openModal(c)));
+  modalClose.addEventListener('click', closeModal);
+  overlay.addEventListener('click', e => { if (e.target === overlay) closeModal(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+  /* NAV ACTIVE HIGHLIGHT */
+  const sections = document.querySelectorAll('section[id]');
+  const navAs    = document.querySelectorAll('.nav-links a');
+  window.addEventListener('scroll', () => {
+    let cur = '';
+    sections.forEach(s => { if (window.scrollY >= s.offsetTop - 80) cur = s.id; });
+    navAs.forEach(a => { a.style.color = a.getAttribute('href') === '#' + cur ? 'var(--teal)' : ''; });
+  }, { passive: true });
+</script>
+</body>
+</html>
