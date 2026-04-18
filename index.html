@@ -52,67 +52,22 @@
       background: rgba(13,27,42,0.88); backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--border); transition: background var(--trans);
     }
-    /* LOGO STYLES - Add this to your existing CSS */
-    /* .nav-logo {
+
+    .nav-logo {
       display: flex;
       align-items: center;
       height: 100%;
     }
-
-    .nav-logo-img {
-      height: 50px;
+    .nav-logo-svg {
+      height: 48px;
       width: auto;
-      max-height: 70%;
       object-fit: contain;
-      transition: height var(--trans);
+      transition: all var(--trans);
     }
-
-    /* Responsive logo sizes */
-    /*@media (max-width: 768px) {
-      .nav-logo-img {
-        height: 32px;
-      }
-    } */
-
-    /* LOGO SVG STYLES */
-/* LOGO SVG STYLES - Updated for larger logo */
-/* LOGO SVG STYLES */
-.nav-logo {
-  display: flex;
-  align-items: center;
-  height: 100%;
-}
-
-.nav-logo-svg {
-  height: 48px;  /* Perfect size for navbar */
-  width: auto;
-  object-fit: contain;
-  transition: all var(--trans);
-}
-
-/* Responsive adjustments */
-@media (max-width: 768px) {
-  .nav-logo-svg {
-    height: 42px;
-  }
-}
-
-@media (max-width: 600px) {
-  .nav-logo-svg {
-    height: 38px;
-  }
-}
-
-/* Optional: On very small screens, hide the divider line and text to save space */
-@media (max-width: 550px) {
-  .nav-logo-svg line,
-  .nav-logo-svg text:not(:first-of-type) {
-    display: none;
-  }
-}
+    @media (max-width: 768px) { .nav-logo-svg { height: 42px; } }
+    @media (max-width: 600px) { .nav-logo-svg { height: 38px; } }
 
     [data-theme="light"] nav { background: rgba(240,244,248,0.88); }
-    /* .nav-logo { font-size: 1.15rem; font-weight: 700; color: var(--teal); letter-spacing: 0.03em; } */
     .nav-links { display: flex; gap: 2rem; list-style: none; }
     .nav-links a { color: var(--text-muted); font-size: 0.92rem; font-weight: 500; transition: color var(--trans); }
     .nav-links a:hover { color: var(--teal); opacity: 1; }
@@ -196,7 +151,8 @@
     .proj-body p { font-size: 0.88rem; color: var(--text-muted); flex: 1; margin-bottom: 1rem; line-height: 1.65; }
     .tech-pills { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 1rem; }
     .tech-pill { font-size: 0.72rem; padding: 3px 9px; border-radius: 4px; background: var(--teal-glow); border: 1px solid var(--border); color: var(--teal); font-weight: 600; }
-    .proj-footer { display: flex; justify-content: flex-end; }
+    .proj-footer { display: flex; justify-content: space-between; align-items: center; }
+    .proj-badge { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; padding: 3px 8px; border-radius: 4px; background: rgba(45,212,191,0.15); color: var(--teal); border: 1px solid var(--border); }
     .view-btn { font-size: 0.82rem; color: var(--teal); font-weight: 600; background: none; border: none; cursor: pointer; display: flex; align-items: center; gap: 6px; transition: gap var(--trans); }
     .view-btn:hover { gap: 10px; }
 
@@ -213,6 +169,10 @@
     .modal-body p { color: var(--text-muted); margin-bottom: 1.2rem; line-height: 1.8; font-size: 0.95rem; }
     .modal-tech { margin-bottom: 1.4rem; }
     .modal-tech h4 { font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--teal); margin-bottom: 0.6rem; }
+    .modal-phase { margin-bottom: 1.4rem; padding: 1rem; background: var(--teal-glow); border: 1px solid var(--border); border-radius: 8px; }
+    .modal-phase h4 { font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--teal); margin-bottom: 0.5rem; }
+    .modal-phase ul { padding-left: 1.2rem; color: var(--text-muted); font-size: 0.88rem; }
+    .modal-phase ul li { margin-bottom: 0.25rem; }
     .modal-links { display: flex; gap: 0.8rem; flex-wrap: wrap; }
 
     /* CONTACT */
@@ -231,65 +191,55 @@
 </head>
 <body>
 
-<!-- ICON SPRITE — all SVG icons defined once, used everywhere via <use> -->
+<!-- ICON SPRITE -->
 <svg xmlns="http://www.w3.org/2000/svg" style="display:none">
-  <symbol id="ico-code"       viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></symbol>
-  <symbol id="ico-send"       viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></symbol>
-  <symbol id="ico-sun"        viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></symbol>
-  <symbol id="ico-moon"       viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></symbol>
-  <symbol id="ico-menu"       viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></symbol>
-  <symbol id="ico-arrow-right"viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></symbol>
-  <symbol id="ico-external"   viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></symbol>
-  <symbol id="ico-github"     viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></symbol>
-  <symbol id="ico-linkedin"   viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></symbol>
-  <symbol id="ico-mail"       viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></symbol>
-  <symbol id="ico-briefcase"  viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></symbol>
-  <symbol id="ico-cal"        viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></symbol>
-  <symbol id="ico-brain"      viewBox="0 0 24 24"><path d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96-.46 2.5 2.5 0 0 1-2.96-3.08 3 3 0 0 1-.34-5.58 2.5 2.5 0 0 1 1.32-4.24 2.5 2.5 0 0 1 4.44-1.24"/><path d="M14.5 2A2.5 2.5 0 0 0 12 4.5v15a2.5 2.5 0 0 0 4.96-.46 2.5 2.5 0 0 0 2.96-3.08 3 3 0 0 0 .34-5.58 2.5 2.5 0 0 0-1.32-4.24 2.5 2.5 0 0 0-4.44-1.24"/></symbol>
-  <symbol id="ico-phone"      viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18" stroke-width="3"/></symbol>
-  <symbol id="ico-palette"    viewBox="0 0 24 24"><circle cx="13.5" cy="6.5" r=".5" fill="currentColor"/><circle cx="17.5" cy="10.5" r=".5" fill="currentColor"/><circle cx="8.5" cy="7.5" r=".5" fill="currentColor"/><circle cx="6.5" cy="12.5" r=".5" fill="currentColor"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"/></symbol>
-  <symbol id="ico-heart"      viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></symbol>
-  <symbol id="ico-x"          viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></symbol>
-  <symbol id="ico-star"       viewBox="0 0 24 24" fill="currentColor" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></symbol>
+  <symbol id="ico-code"        viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></symbol>
+  <symbol id="ico-send"        viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></symbol>
+  <symbol id="ico-sun"         viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></symbol>
+  <symbol id="ico-moon"        viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></symbol>
+  <symbol id="ico-menu"        viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></symbol>
+  <symbol id="ico-arrow-right" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></symbol>
+  <symbol id="ico-external"    viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></symbol>
+  <symbol id="ico-github"      viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></symbol>
+  <symbol id="ico-linkedin"    viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></symbol>
+  <symbol id="ico-mail"        viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></symbol>
+  <symbol id="ico-briefcase"   viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></symbol>
+  <symbol id="ico-cal"         viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></symbol>
+  <symbol id="ico-brain"       viewBox="0 0 24 24"><path d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96-.46 2.5 2.5 0 0 1-2.96-3.08 3 3 0 0 1-.34-5.58 2.5 2.5 0 0 1 1.32-4.24 2.5 2.5 0 0 1 4.44-1.24"/><path d="M14.5 2A2.5 2.5 0 0 0 12 4.5v15a2.5 2.5 0 0 0 4.96-.46 2.5 2.5 0 0 0 2.96-3.08 3 3 0 0 0 .34-5.58 2.5 2.5 0 0 0-1.32-4.24 2.5 2.5 0 0 0-4.44-1.24"/></symbol>
+  <symbol id="ico-phone"       viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18" stroke-width="3"/></symbol>
+  <symbol id="ico-palette"     viewBox="0 0 24 24"><circle cx="13.5" cy="6.5" r=".5" fill="currentColor"/><circle cx="17.5" cy="10.5" r=".5" fill="currentColor"/><circle cx="8.5" cy="7.5" r=".5" fill="currentColor"/><circle cx="6.5" cy="12.5" r=".5" fill="currentColor"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"/></symbol>
+  <symbol id="ico-heart"       viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></symbol>
+  <symbol id="ico-x"           viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></symbol>
+  <symbol id="ico-star"        viewBox="0 0 24 24" fill="currentColor" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></symbol>
+  <!-- Task / checklist icon for the new project -->
+  <symbol id="ico-task"        viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><polyline points="9 11 12 14 22 4" style="stroke-linecap:round;stroke-linejoin:round"/><line x1="3" y1="9" x2="3" y2="9"/><path d="M9 3H5a2 2 0 0 0-2 2v4"/><path d="M15 3h4a2 2 0 0 1 2 2v4"/><line x1="3" y1="21" x2="21" y2="21" style="stroke-linecap:round"/></symbol>
+  <!-- Better task icon: clipboard with check -->
+  <symbol id="ico-clipboard"   viewBox="0 0 24 24"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1"/><polyline points="9 12 11 14 15 10"/></symbol>
 </svg>
 
 <!-- NAV -->
 <nav>
-  <!-- <div class="nav-logo">
-  <img src="logo.png" alt="Muhammad Faraz" class="nav-logo-img">
-</div> -->
-
   <div class="nav-logo">
-  <svg viewBox="0 0 420 80" xmlns="http://www.w3.org/2000/svg" class="nav-logo-svg">
-    <defs>
-      <linearGradient id="tealGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-        <stop offset="0%" style="stop-color:#2dd4bf;stop-opacity:1" />
-        <stop offset="100%" style="stop-color:#0d9488;stop-opacity:1" />
-      </linearGradient>
-    </defs>
-    
-    <g transform="translate(10, 8)">
-      <path d="M30,15 L15,35 L30,55" stroke="url(#tealGrad)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-      <path d="M65,15 L85,35 L65,55 L45,35 Z" stroke="url(#tealGrad)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-      <circle cx="50" cy="35" r="4" fill="#2dd4bf"/>
-    </g>
-
-    <text x="110" y="58" font-family="'Inter', 'Segoe UI', sans-serif" font-size="44" font-weight="700">
-      <tspan fill="#2dd4bf">M</tspan>
-      <tspan fill="var(--text)">F</tspan>
-    </text>
-
-    <line x1="200" y1="22" x2="188" y2="62" stroke="var(--text-muted)" stroke-width="1.5" opacity="0.4" />
-    
-    <text x="202" y="39" font-family="'Inter', 'Segoe UI', sans-serif" font-size="13" font-weight="600" fill="var(--text-muted)" letter-spacing="2.5">
-      DEVELOPER
-    </text>
-    <text x="202" y="56" font-family="'Inter', 'Segoe UI', sans-serif" font-size="13" font-weight="600" fill="var(--text-muted)" letter-spacing="2.5">
-      DESIGNER
-    </text>
-  </svg>
-</div>
-
+    <svg viewBox="0 0 420 80" xmlns="http://www.w3.org/2000/svg" class="nav-logo-svg">
+      <defs>
+        <linearGradient id="tealGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" style="stop-color:#2dd4bf;stop-opacity:1" />
+          <stop offset="100%" style="stop-color:#0d9488;stop-opacity:1" />
+        </linearGradient>
+      </defs>
+      <g transform="translate(10, 8)">
+        <path d="M30,15 L15,35 L30,55" stroke="url(#tealGrad)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+        <path d="M65,15 L85,35 L65,55 L45,35 Z" stroke="url(#tealGrad)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+        <circle cx="50" cy="35" r="4" fill="#2dd4bf"/>
+      </g>
+      <text x="110" y="58" font-family="'Inter', 'Segoe UI', sans-serif" font-size="44" font-weight="700">
+        <tspan fill="#2dd4bf">M</tspan><tspan fill="var(--text)">F</tspan>
+      </text>
+      <line x1="200" y1="22" x2="188" y2="62" stroke="var(--text-muted)" stroke-width="1.5" opacity="0.4" />
+      <text x="202" y="39" font-family="'Inter', 'Segoe UI', sans-serif" font-size="13" font-weight="600" fill="var(--text-muted)" letter-spacing="2.5">DEVELOPER</text>
+      <text x="202" y="56" font-family="'Inter', 'Segoe UI', sans-serif" font-size="13" font-weight="600" fill="var(--text-muted)" letter-spacing="2.5">DESIGNER</text>
+    </svg>
+  </div>
 
   <ul class="nav-links" id="navLinks">
     <li><a href="#about">About</a></li>
@@ -349,7 +299,7 @@
         <div class="skills-group">
           <h4>Development</h4>
           <div class="skill-tags">
-            <span class="skill-tag">Flutter</span><span class="skill-tag">Dart</span><span class="skill-tag">Firebase</span><span class="skill-tag">RESTful APIs</span><span class="skill-tag">Git</span><span class="skill-tag">Mobile Dev</span><span class="skill-tag">Web Dev</span>
+            <span class="skill-tag">Flutter</span><span class="skill-tag">Dart</span><span class="skill-tag">Firebase</span><span class="skill-tag">RESTful APIs</span><span class="skill-tag">BLoC</span><span class="skill-tag">Git</span><span class="skill-tag">Mobile Dev</span><span class="skill-tag">Web Dev</span>
           </div>
         </div>
         <div class="skills-group">
@@ -359,9 +309,9 @@
           </div>
         </div>
         <div class="skills-group">
-          <h4>Core Competencies</h4>
+          <h4>Architecture &amp; Practices</h4>
           <div class="skill-tags">
-            <span class="skill-tag">Cross-functional Collaboration</span><span class="skill-tag">Performance Optimization</span><span class="skill-tag">Clean Code</span><span class="skill-tag">Problem Solving</span>
+            <span class="skill-tag">Clean Architecture</span><span class="skill-tag">Repository Pattern</span><span class="skill-tag">Dependency Injection</span><span class="skill-tag">Performance Optimization</span><span class="skill-tag">Problem Solving</span>
           </div>
         </div>
       </div>
@@ -420,27 +370,16 @@
 
     <div class="projects-grid">
 
-      <!--
-      ╔══════════════════════════════════════════════════════════╗
-      ║                 HOW TO ADD A NEW PROJECT                 ║
-      ╠══════════════════════════════════════════════════════════╣
-      ║  1. Copy any <div class="project-card"> block below      ║
-      ║     and paste it inside .projects-grid                   ║
-      ║                                                          ║
-      ║  2. Fill in the data-* attributes:                       ║
-      ║     data-title   → full project name (shown in modal)    ║
-      ║     data-desc    → full description (shown in modal)     ║
-      ║     data-tech    → comma-separated stack                  ║
-      ║     data-live    → live URL (leave "" to hide button)    ║
-      ║     data-github  → GitHub URL (leave "" to hide button)  ║
-      ║                                                          ║
-      ║  3. Swap the icon: change ico-brain / ico-phone /        ║
-      ║     ico-palette to any icon id in the SVG sprite above,  ║
-      ║     or replace the <svg> with a real <img> screenshot.   ║
-      ║                                                          ║
-      ║  4. Update the card text: <h3>, <p>, .tech-pill spans    ║
-      ╚══════════════════════════════════════════════════════════╝
-      -->
+      <!-- ═══════════════════════════════════════════════════════
+           HOW TO ADD A NEW PROJECT
+           ───────────────────────────────────────────────────────
+           1. Copy any project-card block and paste inside .projects-grid
+           2. Fill in data-title, data-desc, data-tech, data-live, data-github
+           3. Set data-phase2 to a comma-separated list for Phase 2 items
+              (leave "" if no roadmap to show)
+           4. Set data-status: "mvp" shows an MVP badge, "" hides it
+           5. Swap the icon in .proj-img or drop in an <img> screenshot
+      ═══════════════════════════════════════════════════════ -->
 
       <!-- PROJECT 1 — Lumora -->
       <div class="project-card"
@@ -448,7 +387,9 @@
         data-desc="Lumora is a final-year project focused on making mental health support accessible and comfortable. The app features mood tracking, AI-powered chatbot conversations, and structured therapy modules. Designed with deep attention to accessibility, emotional comfort, and intuitive navigation — applying usability heuristics and consistent design systems to reduce cognitive load. The front-end integrates RESTful APIs backed by cloud services for scalable performance."
         data-tech="Flutter, Dart, RESTful APIs, Firebase, Figma, UI/UX Design"
         data-live=""
-        data-github="">
+        data-github=""
+        data-status=""
+        data-phase2="">
         <div class="proj-img">
           <svg width="64" height="64" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><use href="#ico-brain"/></svg>
         </div>
@@ -459,58 +400,65 @@
             <span class="tech-pill">Flutter</span><span class="tech-pill">Firebase</span><span class="tech-pill">REST API</span><span class="tech-pill">Figma</span>
           </div>
           <div class="proj-footer">
+            <span></span><!-- spacer -->
             <button class="view-btn">View Details <svg class="ico" width="14" height="14" stroke-width="2.5"><use href="#ico-arrow-right"/></svg></button>
           </div>
         </div>
       </div>
 
-      <!-- PROJECT 2 — uncomment and fill in when ready
+      <!-- PROJECT 2 — Task Management Dashboard ✦ NEW ✦ -->
       <div class="project-card"
-        data-title="Your Second Project Title"
-        data-desc="Replace this with a full description of your project. What problem does it solve? What were the key challenges? What are you most proud of? This text appears in the modal when a visitor clicks View Details."
-        data-tech="Flutter, Dart, Firebase"
-        data-live="https://your-live-link.com"
-        data-github="https://github.com/yourusername/repo">
+        data-title="Task Management Dashboard"
+        data-desc="A production-ready task management app built with Flutter and BLoC state management. Features include email authentication, project and task CRUD operations, real-time sync across devices, dark/light theme, and task prioritization with due dates. Firebase powers the backend with Firestore for real-time data and Auth for secure access. The project follows clean architecture with repository pattern and dependency injection."
+        data-tech="Flutter, BLoC, Firebase Auth, Cloud Firestore, Clean Architecture, Dependency Injection"
+        data-live=""
+        data-github="https://github.com/MuhammadFaraz032/task-manager"
+        data-status="mvp"
+        data-phase2="Team collaboration,Push notifications,Offline support">
         <div class="proj-img">
-          <svg width="64" height="64" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><use href="#ico-phone"/></svg>
+          <svg width="64" height="64" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><use href="#ico-clipboard"/></svg>
         </div>
         <div class="proj-body">
-          <h3>Your Project Title</h3>
-          <p>Short teaser sentence shown on the card. Keep it to 1–2 lines describing what the project does.</p>
+          <h3>Task Management Dashboard</h3>
+          <p>Production-ready Flutter app with BLoC, Firebase real-time sync, authentication, and task prioritization.</p>
           <div class="tech-pills">
-            <span class="tech-pill">Flutter</span><span class="tech-pill">Dart</span><span class="tech-pill">Firebase</span>
+            <span class="tech-pill">Flutter</span><span class="tech-pill">BLoC</span><span class="tech-pill">Firestore</span><span class="tech-pill">Firebase Auth</span><span class="tech-pill">Clean Arch</span>
           </div>
           <div class="proj-footer">
+            <span class="proj-badge">MVP Complete</span>
             <button class="view-btn">View Details <svg class="ico" width="14" height="14" stroke-width="2.5"><use href="#ico-arrow-right"/></svg></button>
           </div>
         </div>
       </div>
-      -->
 
-      <!-- PROJECT 3 — uncomment and fill in when ready
+      <!--
+      PROJECT 3 — uncomment and fill in when ready
       <div class="project-card"
         data-title="Your Third Project Title"
-        data-desc="Replace this with a full description of your third project. Describe the features, your role, the tech stack, and any results or outcomes. This appears in the lightbox modal."
+        data-desc="Replace this with a full description."
         data-tech="Figma, UI/UX Design, Prototyping"
         data-live=""
-        data-github="">
+        data-github=""
+        data-status=""
+        data-phase2="">
         <div class="proj-img">
-          <svg width="64" height="64" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><use href="#ico-palette"/></svg>
+          <svg width="64" height="64" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><use href="#ico-palette"/></svg>
         </div>
         <div class="proj-body">
           <h3>Your Project Title</h3>
-          <p>Short teaser for your third project. Replace with a real description once you add your project details.</p>
+          <p>Short teaser for your third project.</p>
           <div class="tech-pills">
-            <span class="tech-pill">Figma</span><span class="tech-pill">UI/UX</span><span class="tech-pill">Prototyping</span>
+            <span class="tech-pill">Figma</span><span class="tech-pill">UI/UX</span>
           </div>
           <div class="proj-footer">
+            <span></span>
             <button class="view-btn">View Details <svg class="ico" width="14" height="14" stroke-width="2.5"><use href="#ico-arrow-right"/></svg></button>
           </div>
         </div>
       </div>
       -->
 
-    </div><!-- end .projects-grid -->
+    </div>
   </div>
 </section>
 
@@ -528,6 +476,11 @@
       <div class="modal-tech">
         <h4>Tech Stack</h4>
         <div class="skill-tags" id="modalTech"></div>
+      </div>
+      <!-- Phase 2 roadmap — only rendered when data-phase2 is set -->
+      <div class="modal-phase" id="modalPhase" style="display:none">
+        <h4>Phase 2 Roadmap</h4>
+        <ul id="modalPhaseList"></ul>
       </div>
       <div class="modal-links" id="modalLinks"></div>
     </div>
@@ -550,8 +503,7 @@
           <svg class="ico" width="18" height="18" stroke-width="2"><use href="#ico-linkedin"/></svg>
           LinkedIn
         </a>
-        <!-- Replace # below with https://github.com/yourusername once you have a GitHub profile -->
-        <a class="contact-link" href="#" target="_blank" rel="noopener">
+        <a class="contact-link" href="https://github.com/MuhammadFaraz032" target="_blank" rel="noopener">
           <svg class="ico" width="18" height="18" stroke-width="2"><use href="#ico-github"/></svg>
           GitHub
         </a>
@@ -567,8 +519,8 @@
 </footer>
 
 <script>
-  /* THEME */
-  const root = document.documentElement;
+  /* ── THEME ── */
+  const root      = document.documentElement;
   const themeBtn  = document.getElementById('themeBtn');
   const themeIcon = document.getElementById('themeIcon');
 
@@ -578,52 +530,90 @@
     localStorage.setItem('theme', t);
   }
   applyTheme(localStorage.getItem('theme') || 'dark');
-  themeBtn.addEventListener('click', () => applyTheme(root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark'));
+  themeBtn.addEventListener('click', () =>
+    applyTheme(root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark')
+  );
 
-  /* MOBILE NAV */
+  /* ── MOBILE NAV ── */
   const hamburger = document.getElementById('hamburger');
   const navLinks  = document.getElementById('navLinks');
   hamburger.addEventListener('click', () => navLinks.classList.toggle('open'));
-  navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
+  navLinks.querySelectorAll('a').forEach(a =>
+    a.addEventListener('click', () => navLinks.classList.remove('open'))
+  );
 
-  /* MODAL */
+  /* ── MODAL ── */
   const overlay    = document.getElementById('modalOverlay');
   const modalTitle = document.getElementById('modalTitle');
   const modalDesc  = document.getElementById('modalDesc');
   const modalTech  = document.getElementById('modalTech');
+  const modalPhase = document.getElementById('modalPhase');
+  const modalPhaseList = document.getElementById('modalPhaseList');
   const modalLinks = document.getElementById('modalLinks');
   const modalClose = document.getElementById('modalClose');
 
   function openModal(card) {
+    // Title & description
     modalTitle.textContent = card.dataset.title;
     modalDesc.textContent  = card.dataset.desc;
+
+    // Tech stack pills
     modalTech.innerHTML = '';
     card.dataset.tech.split(',').forEach(t => {
-      const s = document.createElement('span'); s.className = 'skill-tag'; s.textContent = t.trim(); modalTech.appendChild(s);
+      const s = document.createElement('span');
+      s.className = 'skill-tag';
+      s.textContent = t.trim();
+      modalTech.appendChild(s);
     });
+
+    // Phase 2 roadmap (only if data-phase2 is set and non-empty)
+    const phase2 = (card.dataset.phase2 || '').trim();
+    if (phase2) {
+      modalPhaseList.innerHTML = '';
+      phase2.split(',').forEach(item => {
+        const li = document.createElement('li');
+        li.textContent = item.trim();
+        modalPhaseList.appendChild(li);
+      });
+      modalPhase.style.display = 'block';
+    } else {
+      modalPhase.style.display = 'none';
+    }
+
+    // Action buttons
     modalLinks.innerHTML = '';
-    const live = card.dataset.live, gh = card.dataset.github;
+    const live = card.dataset.live   || '';
+    const gh   = card.dataset.github || '';
     if (live && !live.includes('your-live'))
       modalLinks.innerHTML += `<a href="${live}" target="_blank" rel="noopener" class="btn btn-primary"><svg class="ico" width="15" height="15" stroke-width="2"><use href="#ico-external"/></svg> Live Demo</a>`;
-    if (gh && !gh.includes('yourusername'))
+    if (gh && !gh.includes('yourusername') && gh !== '#')
       modalLinks.innerHTML += `<a href="${gh}" target="_blank" rel="noopener" class="btn btn-outline"><svg class="ico" width="15" height="15" stroke-width="2"><use href="#ico-github"/></svg> View on GitHub</a>`;
+
     overlay.classList.add('open');
     document.body.style.overflow = 'hidden';
   }
-  function closeModal() { overlay.classList.remove('open'); document.body.style.overflow = ''; }
 
-  document.querySelectorAll('.project-card').forEach(c => c.addEventListener('click', () => openModal(c)));
+  function closeModal() {
+    overlay.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  document.querySelectorAll('.project-card').forEach(c =>
+    c.addEventListener('click', () => openModal(c))
+  );
   modalClose.addEventListener('click', closeModal);
   overlay.addEventListener('click', e => { if (e.target === overlay) closeModal(); });
   document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
 
-  /* NAV ACTIVE HIGHLIGHT */
+  /* ── NAV ACTIVE HIGHLIGHT ── */
   const sections = document.querySelectorAll('section[id]');
   const navAs    = document.querySelectorAll('.nav-links a');
   window.addEventListener('scroll', () => {
     let cur = '';
     sections.forEach(s => { if (window.scrollY >= s.offsetTop - 80) cur = s.id; });
-    navAs.forEach(a => { a.style.color = a.getAttribute('href') === '#' + cur ? 'var(--teal)' : ''; });
+    navAs.forEach(a => {
+      a.style.color = a.getAttribute('href') === '#' + cur ? 'var(--teal)' : '';
+    });
   }, { passive: true });
 </script>
 </body>
